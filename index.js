@@ -19,6 +19,11 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get(`/api/whoami`, function(req,res){
+  let jsonHeaders = JSON.parse(JSON.stringify(req.headers));
+
+  res.json({"ipaddress": jsonHeaders.host, "language": jsonHeaders["accept-language"], "software": jsonHeaders["user-agent"] });
+});
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
